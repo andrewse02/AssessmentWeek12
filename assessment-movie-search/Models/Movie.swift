@@ -21,7 +21,7 @@ struct Movie: Codable {
     let title: String
     let summary: String
     let rating: Double
-    let imageURL: String
+    let imageURL: String?
     
     private enum CodingKeys: String, CodingKey {
         case title

@@ -32,6 +32,7 @@ class MovieNetworkManager {
                     completion(.success(topLevelObject.results))
                 } catch {
                     print(error.localizedDescription)
+                    print(error)
                     completion(.failure(.thrownError(error)))
                 }
             }
@@ -40,9 +41,11 @@ class MovieNetworkManager {
     
     static func fetchImage(for movie: Movie, completion: @escaping (Result<UIImage, MovieError>) -> Void) {
         
+        guard let imageURL = movie.imageURL else { return completion(.success(UIImage(systemName: "photo") ?? UIImage())) }
+        
         guard var components = URLComponents(string: Strings.imageBaseURL) else { return completion(.failure(.invalidURL)) }
         
-        components.path.append(contentsOf: movie.imageURL)
+        components.path.append(contentsOf: imageURL)
         
         guard let finalURL = components.url else { return completion(.failure(.invalidURL)) }
         

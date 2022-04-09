@@ -46,7 +46,7 @@ class MovieTableViewCell: UITableViewCell {
         })
         
         titleLabel.text = movie.title
-        ratingLabel.text = String(movie.rating)
+        ratingLabel.text = movie.rating > 0 ? String(movie.rating) : "No rating"
         summaryLabel.text = movie.summary
     }
 }
